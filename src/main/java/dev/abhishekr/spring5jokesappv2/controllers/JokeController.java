@@ -2,6 +2,8 @@ package dev.abhishekr.spring5jokesappv2.controllers;
 
 import dev.abhishekr.spring5jokesappv2.services.JokeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JokeController {
@@ -11,4 +13,9 @@ public class JokeController {
         this.jokeService = jokeService;
     }
 
+    @RequestMapping({"/", ""})
+    public String generateJoke(Model model) {
+        model.addAttribute("joke", jokeService.getJoke());
+        return "index";
+    }
 }
